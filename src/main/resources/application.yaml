@@ -1,0 +1,23 @@
+server:
+  port: 8080
+spring:
+  thymeleaf:
+    cache: false
+    mode: HTML
+    encoding: UTF-8
+
+
+#Druid配置 数据库连接
+  datasource:
+    username: root
+    password: root
+    url: jdbc:oracle:thin:@47.102.213.141:1521:helowin
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: oracle.jdbc.OracleDriver
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 60000
+mybatis:
+  mapper-locations:  classpath:mapper/*.xml

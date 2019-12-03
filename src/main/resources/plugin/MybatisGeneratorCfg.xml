@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <!--<properties resource="dbconfig.properties"/>-->
+    <context id="mbp_tables" targetRuntime="MyBatis3">
+        <!-- 自定义序列化 -->
+        <!--<plugin type="org.ihansen.mbp.extend.CustomSerializablePlugin"></plugin>-->
+
+        <!-- oracle/mysql/sqlserver方言插件 -->
+        <!--<plugin type="org.ihansen.mbp.extend.CustomPlugin">-->
+            <!--<property name="dbType" value="MYSQL"/>-->
+        <!--</plugin>-->
+
+        <!-- 自定义Example类文件名字 -->
+        <!-- <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+            <property name="searchString" value="Example$"/>
+            <property name="replaceString" value="EX"/>
+        </plugin>-->
+
+        <!-- 注释控制 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- 数据库连接 -->
+        <jdbcConnection driverClass="oracle.jdbc.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@47.102.213.141:1521:helowin" userId="root"
+                        password="root"/>
+
+
+         <!--用于数据库字段类型自定义转换-->
+        <!--<javaTypeResolver type="org.ihansen.mbp.extend.CustJavaTypeResolver">-->
+        <!--&lt;!&ndash; 属性可以控制是否强制DECIMAL和NUMERIC类型的字段转换为Java类型的java.math.BigDecimal,默认值为false &ndash;&gt;-->
+        <!--<property name="forceBigDecimals" value="false"/>-->
+        <!--</javaTypeResolver>-->
+
+        <!-- 数据表对应的实体层 -->
+        <javaModelGenerator targetPackage="xyz.lzbin.shop.pojo" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaModelGenerator>
+
+        <!-- sql mapper 配置文件(xml配置文件) -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+            <!-- 此属性表示是否和原xml合并,false表示覆盖 -->
+            <property name="isMergeable" value="false"/>
+        </sqlMapGenerator>
+
+        <!-- 在ibatis2 中是dao层，但在mybatis3中，其实就是mapper接口 -->
+        <javaClientGenerator targetPackage="xyz.lzbin.shop.dao" type="XMLMAPPER" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!-- 要对那些数据表进行生成操作，至少要有一个 -->
+        <table tableName="store" domainObjectName="Store">
+            <!-- 自定义属性配置：设置此属性表示该字段自增,默认值为id -->
+            <property name="incrementField" value="id"/>
+            <!-- 自定义属性配置：乐观锁版本数据库字段名称，需要为数值类型 -->
+            <!--<property name="versionField" value="version"/>-->
+            <!-- 自定义属性配置：对应的数据源名称 -->
+            <!--<property name="dataSourceName" value="db6"/>-->
+            <property name="enableCountByExample" value="true"/>
+            <property name="enableUpdateByExample" value="true"/>
+            <property name="enableDeleteByExample" value="true"/>
+            <property name="enableSelectByExample" value="true"/>
+            <property name="selectByExampleQueryId" value="true"/>
+        </table>
+        <!--<table tableName="test_name" domainObjectName="oob.Name" incrementField="id"></table>-->
+
+    </context>
+</generatorConfiguration>
