@@ -97,7 +97,24 @@ function myselfinfo(){
 		content: '<div>管理员信息</div>'
 	});
 }
+function menuStatus(){
+    var pathname = window.location.pathname;
+    var arr = pathname.split("/");
+    if(arr.length>1){
+        var curPage = arr[1];
+
+        console.log();
+        var i = curPage.indexOf(".");
+        if(i!=-1){
+        	curPage = curPage.slice(0,i);
+		}
+		$("#"+curPage).parent().addClass("current");
+        $("#"+curPage).parent().parent().parent().css("display","block");
+        $("#"+curPage).parent().parent().parent().prev().addClass("selected");
+	}
+}
 $(function(){
+    menuStatus();
 	getHTMLDate($("#top_time"));
 	getskincookie();
 	Huiasidedisplay();
@@ -132,4 +149,5 @@ $(function(){
 		var hrefRes=hrefStr.substring(0,hrefStr.lastIndexOf('skin/'))+'skin/'+v+'/skin.css';
 		$(window.frames.document).contents().find("#skin").attr("href",hrefRes);
 	});
+
 }); 

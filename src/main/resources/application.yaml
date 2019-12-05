@@ -3,11 +3,13 @@ server:
 spring:
   thymeleaf:
     cache: false
-    mode: HTML
+#    mode: HTML
     encoding: UTF-8
-
-
-#Druid配置 数据库连接
+  mvc:
+    favicon:
+      enable : true
+    static-path-pattern: /static/**
+  #Druid配置 数据库连接
   datasource:
     username: root
     password: root
@@ -19,5 +21,9 @@ spring:
       min-idle: 5
       max-active: 20
       max-wait: 60000
+
 mybatis:
   mapper-locations:  classpath:mapper/*.xml
+logging:
+  level:
+    xyz.lzbin.shop.dao: debug

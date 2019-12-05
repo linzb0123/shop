@@ -5,4 +5,5 @@ package xyz.lzbin.shop.service;
  * 2019/12/2
  */
 public interface HelloService {
+    String hello();
 }

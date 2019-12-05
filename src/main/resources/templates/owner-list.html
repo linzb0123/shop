@@ -1,0 +1,384 @@
+﻿<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--_meta 作为公共模版分离出去-->
+<th:block th:replace="_meta :: meta"></th:block>
+<!--/meta 作为公共模版分离出去-->
+
+<title>lwc商店后台</title>
+<style>
+    .table > tbody > tr > td {
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+<!--_header 作为公共模版分离出去-->
+<div th:replace="_header :: #navbar-wrapper"></div>
+<!--/_header 作为公共模版分离出去-->
+
+<!--_menu 作为公共模版分离出去-->
+<div th:replace="_menu :: #Hui-aside"></div>
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a>
+</div>
+<!--/_menu 作为公共模版分离出去-->
+
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
+        <span class="c-gray en">&gt;</span>
+        商家管理
+        <span class="c-gray en">&gt;</span>
+        商家列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
+                href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
+    </nav>
+    <div class="Hui-article">
+        <article class="cl pd-20">
+            <form id="form-search" class="text-c">
+                <input type="text" class="input-text" style="width:250px" placeholder="输入商家名称" id="searchKey"
+                       name="searchKey">
+                <button type="submit" id="searchBtn" class="btn btn-success"><i class="Hui-iconfont">&#xe665;</i> 搜商家
+                </button>
+            </form>
+            <div class="cl pd-5 bg-1 bk-gray mt-20">
+                <span class="l"><a href="javascript:;" onclick="owner_add('添加商家','owner-add.html','800','500')"
+                                   class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加商家</a> </span>
+                <span class="r">共有数据：<strong id="ownerCount">0</strong> 条</span>
+            </div>
+            <table class="table table-border table-bordered table-bg">
+                <thead>
+                <tr>
+                    <th scope="col" colspan="12">商家列表</th>
+                </tr>
+
+                <tr class="text-c">
+                    <th width="25"><input type="checkbox" name="" value=""></th>
+                    <th width="40">ID</th>
+                    <th width="50">昵称</th>
+                    <th width="50">姓名</th>
+                    <th width="40">性别</th>
+                    <th width="60">手机</th>
+                    <th width="100">用户名</th>
+                    <th width="60">状态</th>
+                    <th width="60">实名</th>
+                    <th width="100">身份证</th>
+                    <th width="80">创建时间</th>
+                    <th width="50">操作</th>
+                </tr>
+                </thead>
+            </table>
+        </article>
+    </div>
+</section>
+
+<!--_footer 作为公共模版分离出去-->
+<th:block th:replace="_footer :: footer"></th:block>
+<!--/_footer /作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="/static/lib/common.js"></script>
+<script type="text/javascript" th:inline="none">
+    $(function () {
+        $('.table').dataTable({
+            serverSide: true,//开启服务器模式
+            "processing": true,//加载显示提示
+            searching: false,
+            bLengthChange: false,
+            "ajax": {
+                url: "/owner/getList",
+                type: 'GET'
+            },
+            data: {
+                "searchKey": "",
+            },
+            "columns": [
+                {
+                    "data": null,
+                    render: function (data, type, row, meta) {
+                        return "<input name=\"checkbox\" value=\"" + row.id + "\" type=\"checkbox\">";
+                    }
+                },
+                {"data": "id"},
+                {"data": "nickname"},
+                {"data": "name"},
+                {
+                    "data": "gender",
+                    // render:function(data,type,row,meta){
+                    //     return "<a href=\"javascript:;\" ><i class=\"avatar size-XL radius\"><img alt=\"游戏图标\" src=\""+data+"\"></i></a>"
+                    // }
+                },
+                {"data": "tel"},
+                {"data": "username"},
+                {
+                    "data": "status",
+                    render: function (data, type, row, meta) {
+                        if (data == 0) {
+                            return "<span class=\"label label-success radius td-status\">正常</span>";
+                        }
+                        else if (data == 1) {
+                            return "<span class=\"label label-danger radius td-status\">锁定</span>";
+                        } else {
+                            return "<span class=\"label label-warning radius td-status\">异常</span>";
+                        }
+                    }
+                },
+                {
+                    "data": "realStatus",
+                    render: function (data, type, row, meta) {
+                        if (data == 0) {
+                            return "<span class=\"label label-warningdanger radius td-status\">未实名</span>";
+                        }
+                        else if (data == 1) {
+                            return "<span class=\"label label-success radius td-status\">已实名</span>";
+                        } else {
+                            return "<span class=\"label label-danger radius td-status\">异常</span>";
+                        }
+                    }
+                },
+                {"data": "idCard",},
+                {
+                    "data": "createTime",
+                    render: function (data, type, row, meta) {
+                        return date(data);
+                    }
+                },
+                {
+                    "data": null,
+                    render: function (data, type, row, meta) {
+                        var rowStr = JSON.stringify(row);
+                        console.log(rowStr);
+                        var edit = "<a title=\"编辑\" href=\"javascript:;\" onclick=\'owner_edit(\"编辑\",\"owner-edit\","+ rowStr +")\' class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\" style='font-size:16px;'>&#xe6df;</i></a>";
+                        var lock;// = "<a title=\"锁定\" href=\"javascript:;\" onclick=\"\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\" style='font-size:16px;'>&#xe60e;</i></a>";
+                        var real;
+                        var del = "<a title=\"删除\" href=\"javascript:;\" onclick=\"owner_del(this," + row.id + ")\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\" style='font-size:16px;'>&#xe6e2;</i></a>";
+                        if (row.status == 0) {
+                            lock = "<a title=\"锁定\" href=\"javascript:;\" onclick=\"owner_lock("+row.id+")\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\" style='font-size:16px;'>&#xe60e;</i></a>";
+                        } else {
+                            lock = "<a title=\"启用\" href=\"javascript:;\" onclick=\"owner_unlock("+row.id+")\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\" style='font-size:16px;'>&#xe605;</i></a>";
+                        }
+                        if (row.realStatus == 0) {
+                            real = "<a title=\"实名\" href=\"javascript:;\" onclick=\"owner_real("+row.id+")\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\" style='font-size:16px;'>&#xe6e1;</i></a>";
+                        } else {
+                            real = "<a title=\"取消实名\" href=\"javascript:;\" onclick=\"owner_unreal("+row.id+")\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\" style='font-size:16px;'>&#xe6e0;</i></a>";
+                        }
+                        return edit + lock + real + del;
+                    }
+                }
+            ],
+            "aaSorting": [[1, "asc"]],//默认第几个排序
+            "bStateSave": true,//状态保存
+            "aoColumnDefs": [
+                {"bVisible": false, "aTargets": []}, //控制列的隐藏显示
+                {"orderable": false, "aTargets": [0]}// 制定列不参与排序
+            ],
+            colReorder: true
+        });
+        ownerCount();
+    });
+
+    function ownerCount() {
+        $.ajax({
+            type: 'GET',
+            url: '/owner/count',
+            dataType: 'json',
+            success: function (res) {
+                if (res.code == 200) {
+                    $("#ownerCount").html(res.data.count);
+                    return;
+                }
+                layer.alert(data.message, {title: '错误信息', icon: 2});
+            },
+            error: function (XMLHttpRequest) {
+                layer.alert('数据处理失败! 错误码:' + XMLHttpRequest.status, {title: '错误信息', icon: 2});
+            }
+        })
+    }
+    function addOneTotal(){
+       var cur =  $("#ownerCount").html();
+        $("#ownerCount").html(parseInt(cur)+1);
+    }
+    /*
+        参数解释：
+        title	标题
+        url		请求的url
+        id		需要操作的数据id
+        w		弹出层宽度（缺省调默认值）
+        h		弹出层高度（缺省调默认值）
+    */
+
+    /*删除*/
+    function owner_del(obj, id) {
+        layer.confirm('确认要删除吗？', function (index) {
+            //此处请求后台程序，下方是成功后的前台处理……
+            var inx = layer.load(3);
+            $.ajax({
+                type: 'POST',
+                url: '/owner/remove/' + id,
+                dataType: 'json',
+                success: function (res) {
+                    layer.close(inx);
+                    if (res.code == 200) {
+                        layer.msg('已删除!', {icon: 1, time: 1000});
+                        refresh();
+                        return;
+                    }
+                    layer.alert(res.msg, {title: '错误信息', icon: 2});
+                    return;
+                },
+                error: function (XMLHttpRequest) {
+                    layer.close(inx);
+                    layer.alert('数据处理失败! 错误码:' + XMLHttpRequest.status, {title: '错误信息', icon: 2});
+                }
+            });
+            // $(obj).parents("tr").remove();
+            // layer.msg('已删除!', {icon: 1, time: 1000});
+        });
+    }
+
+    /*商家-增加*/
+    function owner_add(title, url, w, h) {
+        addOneTotal();
+        layer_show(title, url, w, h);
+    }
+
+
+    /*商家-编辑*/
+    var ownerData;
+    function owner_edit(title,url,data) {
+        ownerData = data;
+        layer_show(title, url, 800, 500);
+    }
+
+    /*商家-锁定*/
+    function owner_lock(id) {
+        layer.confirm('确认要锁定吗？', function (index1) {
+            var index = layer.load(3);
+            $.ajax({
+                type: 'POST',
+                url: '/owner/lock',
+                data:{"id":id},
+                success: function (res) {
+                    layer.close(index);
+                    if (res.code !== 200) {
+                        layer.alert(res.msg, {title: '错误信息', icon: 2});
+                        return;
+                    }
+                    refresh();
+                    layer.msg('已经锁定!', {icon: 1, time: 1000});
+
+                },
+                error: function (XMLHttpRequest) {
+                    layer.close(index);
+                    layer.alert('数据处理失败! 错误码:' + XMLHttpRequest.status, {title: '错误信息', icon: 2});
+                }
+            });
+
+        });
+    }
+    /*商家-锁定*/
+    function owner_unlock(id) {
+        layer.confirm('确认要取消锁定吗？', function (index) {
+            var index = layer.load(3);
+            $.ajax({
+                type: 'POST',
+                url: '/owner/unlock',
+                data:{"id":id},
+                success: function (res) {
+                    layer.close(index);
+                    if (res.code !== 200) {
+                        layer.alert(res.msg, {title: '错误信息', icon: 2});
+                        return;
+                    }
+                    refresh();
+                    layer.msg('取消锁定成功!', {icon: 5, time: 1000});
+                },
+                error: function (XMLHttpRequest) {
+                    layer.close(index);
+                    layer.alert('数据处理失败! 错误码:' + XMLHttpRequest.status, {title: '错误信息', icon: 2});
+                }
+            });
+
+        });
+    }
+    function owner_real(id) {
+        layer.confirm('确认通过实名吗？', function (index) {
+            var index = layer.load(3);
+            $.ajax({
+                type: 'POST',
+                url: '/owner/real',
+                data:{"id":id},
+                success: function (res) {
+                    layer.close(index);
+                    if (res.code !== 200) {
+                        layer.alert(res.msg, {title: '错误信息', icon: 2});
+                        return;
+                    }
+                    refresh();
+                    layer.msg('实名通过!', {icon: 5, time: 1000});
+                },
+                error: function (XMLHttpRequest) {
+                    layer.close(index);
+                    layer.alert('数据处理失败! 错误码:' + XMLHttpRequest.status, {title: '错误信息', icon: 2});
+                }
+            });
+
+        });
+    }
+    function owner_unreal(id) {
+        layer.confirm('确认要取消实名吗？', function (index) {
+            var index = layer.load(3);
+            $.ajax({
+                type: 'POST',
+                url: '/owner/unreal',
+                data:{"id":id},
+                success: function (res) {
+                    layer.close(index);
+                    if (res.code !== 200) {
+                        layer.alert(res.msg, {title: '错误信息', icon: 2});
+                        return;
+                    }
+                    refresh();
+                    layer.msg('取消实名成功!', {icon: 5, time: 1000});
+                },
+                error: function (XMLHttpRequest) {
+                    layer.close(index);
+                    layer.alert('数据处理失败! 错误码:' + XMLHttpRequest.status, {title: '错误信息', icon: 2});
+                }
+            });
+
+        });
+    }
+    /*多条件查询*/
+    $("#form-search").validate({
+        rules: {
+            searchKey: {
+                required: false,
+            },
+        },
+        onkeyup: false,
+        focusCleanup: false,
+        success: "valid",
+        submitHandler: function (form) {
+            var searchKey = $('#searchKey').val();
+            console.log(searchKey);
+            var param = {
+                "searchKey": searchKey,
+            };
+            var table = $('.table').DataTable();
+            table.settings()[0].ajax.data = param;
+            table.ajax.reload();
+        }
+    });
+    /**
+     * 提示成功信息
+     * @param content
+     */
+    function msgSuccess(content) {
+        layer.msg(content, {icon: 1, time: 3000});
+    }
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>
