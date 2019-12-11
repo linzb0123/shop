@@ -1,0 +1,90 @@
+﻿<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--_meta 作为公共模版分离出去-->
+<th:block th:replace="_meta :: meta"></th:block>
+<!--/meta 作为公共模版分离出去-->
+
+<title>添加商家 - 商家管理 </title>
+</head>
+<body>
+<article class="cl pd-20">
+    <form action="" method="post" class="form form-horizontal" id="form-type-add">
+        <input type="hidden" id="id" name="id">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>分类名：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="" id="name" name="name">
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
+        </div>
+    </form>
+</article>
+
+<!--_footer 作为公共模版分离出去-->
+<th:block th:replace="_footer :: footer"></th:block>
+<!--/_footer /作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" th:inline="none">
+    $(function () {
+        $("#id").val(parent.typeData.id);
+        $("#name").val(parent.typeData.name);
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+        $("#form-type-add").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 1,
+                    maxlength: 30
+                }
+            },
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function (form) {
+                var index1 = layer.load(3);
+                $(form).ajaxSubmit({
+                    url: "/type/edit",
+                    type: "POST",
+                    success: function (data) {
+                        layer.close(index1);
+                        if (data.code === 200) {
+                            parent.refresh();
+                            parent.msgSuccess("编辑成功");
+                            parent.addOneTotal();
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                        } else {
+                            layer.alert('编辑失败! ' + data.msg, {title: '错误信息', icon: 2});
+                        }
+                    },
+                    error: function (XMLHttpRequest) {
+                        layer.close(index1);
+                        layer.alert('数据处理失败! 错误码:' + XMLHttpRequest.status + ' 错误信息:' + JSON.parse(XMLHttpRequest.responseText).message, {
+                            title: '错误信息',
+                            icon: 2
+                        });
+                    }
+                });
+                // var index = parent.layer.getFrameIndex(window.name);
+                // parent.$('.btn-refresh').click();
+                // parent.layer.close(index);
+            }
+        });
+    });
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

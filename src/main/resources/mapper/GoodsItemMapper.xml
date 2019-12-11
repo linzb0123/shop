@@ -11,7 +11,8 @@
     <result column="STATUS" property="status" jdbcType="DECIMAL" />
     <result column="STATUS_TIME" property="statusTime" jdbcType="TIMESTAMP" />
     <result column="STORE_ID" property="storeId" jdbcType="DECIMAL" />
-    <result column="sort" property="sort" jdbcType="DECIMAL" />
+    <result column="SORT" property="sort" jdbcType="DECIMAL" />
+    <result column="CATEGORY" property="category" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -72,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ID, TITLE, INFO, IMG_URL, PRICE, STOCK, STATUS, STATUS_TIME, STORE_ID, sort
+    ID, TITLE, INFO, IMG_URL, PRICE, STOCK, STATUS, STATUS_TIME, STORE_ID, SORT, CATEGORY
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="xyz.lzbin.shop.pojo.GoodsItemExample" >
     select
@@ -108,11 +109,11 @@
     insert into GOODS_ITEM (ID, TITLE, INFO, 
       IMG_URL, PRICE, STOCK, 
       STATUS, STATUS_TIME, STORE_ID, 
-      sort)
+      SORT, CATEGORY)
     values (#{id,jdbcType=DECIMAL}, #{title,jdbcType=VARCHAR}, #{info,jdbcType=VARCHAR}, 
       #{imgUrl,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{stock,jdbcType=DECIMAL}, 
       #{status,jdbcType=DECIMAL}, #{statusTime,jdbcType=TIMESTAMP}, #{storeId,jdbcType=DECIMAL}, 
-      #{sort,jdbcType=DECIMAL})
+      #{sort,jdbcType=DECIMAL}, #{category,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="xyz.lzbin.shop.pojo.GoodsItem" >
     insert into GOODS_ITEM
@@ -145,7 +146,10 @@
         STORE_ID,
       </if>
       <if test="sort != null" >
-        sort,
+        SORT,
+      </if>
+      <if test="category != null" >
+        CATEGORY,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -178,6 +182,9 @@
       </if>
       <if test="sort != null" >
         #{sort,jdbcType=DECIMAL},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -218,7 +225,10 @@
         STORE_ID = #{record.storeId,jdbcType=DECIMAL},
       </if>
       <if test="record.sort != null" >
-        sort = #{record.sort,jdbcType=DECIMAL},
+        SORT = #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.category != null" >
+        CATEGORY = #{record.category,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -236,7 +246,8 @@
       STATUS = #{record.status,jdbcType=DECIMAL},
       STATUS_TIME = #{record.statusTime,jdbcType=TIMESTAMP},
       STORE_ID = #{record.storeId,jdbcType=DECIMAL},
-      sort = #{record.sort,jdbcType=DECIMAL}
+      SORT = #{record.sort,jdbcType=DECIMAL},
+      CATEGORY = #{record.category,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -269,7 +280,10 @@
         STORE_ID = #{storeId,jdbcType=DECIMAL},
       </if>
       <if test="sort != null" >
-        sort = #{sort,jdbcType=DECIMAL},
+        SORT = #{sort,jdbcType=DECIMAL},
+      </if>
+      <if test="category != null" >
+        CATEGORY = #{category,jdbcType=VARCHAR},
       </if>
     </set>
     where ID = #{id,jdbcType=DECIMAL}
@@ -284,7 +298,18 @@
       STATUS = #{status,jdbcType=DECIMAL},
       STATUS_TIME = #{statusTime,jdbcType=TIMESTAMP},
       STORE_ID = #{storeId,jdbcType=DECIMAL},
-      sort = #{sort,jdbcType=DECIMAL}
+      SORT = #{sort,jdbcType=DECIMAL},
+      CATEGORY = #{category,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
+  <select id="selectGoodsList" parameterType="string" resultMap="BaseResultMap">
+    select * from goods_item
+    <if test="search != null and search != '%%'">
+      WHERE
+      (title like #{search})
+    </if>
+    ORDER BY
+    ${orderCol}
+    ${orderDir}
+  </select>
 </mapper>

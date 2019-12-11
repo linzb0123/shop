@@ -655,6 +655,66 @@ public class OrderItemExample {
             addCriterion("LOGISTICS_ID not between", value1, value2, "logisticsId");
             return (Criteria) this;
         }
+
+        public Criteria andStoreIdIsNull() {
+            addCriterion("STORE_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreIdIsNotNull() {
+            addCriterion("STORE_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreIdEqualTo(Integer value) {
+            addCriterion("STORE_ID =", value, "storeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreIdNotEqualTo(Integer value) {
+            addCriterion("STORE_ID <>", value, "storeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreIdGreaterThan(Integer value) {
+            addCriterion("STORE_ID >", value, "storeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("STORE_ID >=", value, "storeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreIdLessThan(Integer value) {
+            addCriterion("STORE_ID <", value, "storeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreIdLessThanOrEqualTo(Integer value) {
+            addCriterion("STORE_ID <=", value, "storeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreIdIn(List<Integer> values) {
+            addCriterion("STORE_ID in", values, "storeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreIdNotIn(List<Integer> values) {
+            addCriterion("STORE_ID not in", values, "storeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreIdBetween(Integer value1, Integer value2) {
+            addCriterion("STORE_ID between", value1, value2, "storeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("STORE_ID not between", value1, value2, "storeId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

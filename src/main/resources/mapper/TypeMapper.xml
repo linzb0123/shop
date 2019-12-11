@@ -161,4 +161,15 @@
     set NAME = #{name,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
+
+  <select id="selectTypeList" parameterType="string" resultMap="BaseResultMap">
+    select * from type
+    <if test="search != null and search != '%%'">
+      WHERE
+      (name like #{search})
+    </if>
+    ORDER BY
+    ${orderCol}
+    ${orderDir}
+  </select>
 </mapper>

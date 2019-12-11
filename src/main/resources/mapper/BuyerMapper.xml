@@ -303,4 +303,22 @@
       PASSWORD = #{password,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
+  <select id="selectBuyerList" parameterType="string" resultMap="BaseResultMap">
+    select * from buyer
+    <if test="search != null and search != '%%'">
+      WHERE
+      (nickname like #{search}
+      OR
+      name like #{search}
+      OR
+      id_card like #{search}
+      OR
+      tel like #{search}
+      OR
+      username like #{search})
+    </if>
+    ORDER BY
+    ${orderCol}
+    ${orderDir}
+  </select>
 </mapper>

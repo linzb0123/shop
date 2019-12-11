@@ -58,90 +58,90 @@
         </javaClientGenerator>
 
         <!-- 要对那些数据表进行生成操作，至少要有一个 -->
-        <table tableName="store" domainObjectName="Store">
-            <!-- 自定义属性配置：设置此属性表示该字段自增,默认值为id -->
-            <property name="incrementField" value="id"/>
-            <!-- 自定义属性配置：乐观锁版本数据库字段名称，需要为数值类型 -->
-            <!--<property name="versionField" value="version"/>-->
-            <!-- 自定义属性配置：对应的数据源名称 -->
-            <!--<property name="dataSourceName" value="db6"/>-->
-            <property name="enableCountByExample" value="true"/>
-            <property name="enableUpdateByExample" value="true"/>
-            <property name="enableDeleteByExample" value="true"/>
-            <property name="enableSelectByExample" value="true"/>
-            <property name="selectByExampleQueryId" value="true"/>
-        </table>
-        <!-- 要对那些数据表进行生成操作，至少要有一个 -->
-        <table tableName="address" domainObjectName="Address">
-            <!-- 自定义属性配置：设置此属性表示该字段自增,默认值为id -->
-            <property name="incrementField" value="id"/>
-            <!-- 自定义属性配置：乐观锁版本数据库字段名称，需要为数值类型 -->
-            <!--<property name="versionField" value="version"/>-->
-            <!-- 自定义属性配置：对应的数据源名称 -->
-            <!--<property name="dataSourceName" value="db6"/>-->
-            <property name="enableCountByExample" value="true"/>
-            <property name="enableUpdateByExample" value="true"/>
-            <property name="enableDeleteByExample" value="true"/>
-            <property name="enableSelectByExample" value="true"/>
-            <property name="selectByExampleQueryId" value="true"/>
-        </table>
-        <!-- 要对那些数据表进行生成操作，至少要有一个 -->
-        <table tableName="buyer" domainObjectName="Buyer">
-            <!-- 自定义属性配置：设置此属性表示该字段自增,默认值为id -->
-            <property name="incrementField" value="id"/>
-            <!-- 自定义属性配置：乐观锁版本数据库字段名称，需要为数值类型 -->
-            <!--<property name="versionField" value="version"/>-->
-            <!-- 自定义属性配置：对应的数据源名称 -->
-            <!--<property name="dataSourceName" value="db6"/>-->
-            <property name="enableCountByExample" value="true"/>
-            <property name="enableUpdateByExample" value="true"/>
-            <property name="enableDeleteByExample" value="true"/>
-            <property name="enableSelectByExample" value="true"/>
-            <property name="selectByExampleQueryId" value="true"/>
-        </table>
-        <!-- 要对那些数据表进行生成操作，至少要有一个 -->
-        <table tableName="goods_item" domainObjectName="GoodsItem">
-            <!-- 自定义属性配置：设置此属性表示该字段自增,默认值为id -->
-            <property name="incrementField" value="id"/>
-            <!-- 自定义属性配置：乐观锁版本数据库字段名称，需要为数值类型 -->
-            <!--<property name="versionField" value="version"/>-->
-            <!-- 自定义属性配置：对应的数据源名称 -->
-            <!--<property name="dataSourceName" value="db6"/>-->
-            <property name="enableCountByExample" value="true"/>
-            <property name="enableUpdateByExample" value="true"/>
-            <property name="enableDeleteByExample" value="true"/>
-            <property name="enableSelectByExample" value="true"/>
-            <property name="selectByExampleQueryId" value="true"/>
-        </table>
-        <!-- 要对那些数据表进行生成操作，至少要有一个 -->
-        <table tableName="logistics" domainObjectName="Logistics">
-            <!-- 自定义属性配置：设置此属性表示该字段自增,默认值为id -->
-            <property name="incrementField" value="id"/>
-            <!-- 自定义属性配置：乐观锁版本数据库字段名称，需要为数值类型 -->
-            <!--<property name="versionField" value="version"/>-->
-            <!-- 自定义属性配置：对应的数据源名称 -->
-            <!--<property name="dataSourceName" value="db6"/>-->
-            <property name="enableCountByExample" value="true"/>
-            <property name="enableUpdateByExample" value="true"/>
-            <property name="enableDeleteByExample" value="true"/>
-            <property name="enableSelectByExample" value="true"/>
-            <property name="selectByExampleQueryId" value="true"/>
-        </table>
-        <!-- 要对那些数据表进行生成操作，至少要有一个 -->
-        <table tableName="order_goods_item" domainObjectName="OrderGoodsItem">
-            <!-- 自定义属性配置：设置此属性表示该字段自增,默认值为id -->
-            <property name="incrementField" value="id"/>
-            <!-- 自定义属性配置：乐观锁版本数据库字段名称，需要为数值类型 -->
-            <!--<property name="versionField" value="version"/>-->
-            <!-- 自定义属性配置：对应的数据源名称 -->
-            <!--<property name="dataSourceName" value="db6"/>-->
-            <property name="enableCountByExample" value="true"/>
-            <property name="enableUpdateByExample" value="true"/>
-            <property name="enableDeleteByExample" value="true"/>
-            <property name="enableSelectByExample" value="true"/>
-            <property name="selectByExampleQueryId" value="true"/>
-        </table>
-        <!-- 要对那些数据表进行生成操作，至少要有一个 -->
+        <!--<table tableName="store" domainObjectName="Store">-->
+            <!--&lt;!&ndash; 自定义属性配置：设置此属性表示该字段自增,默认值为id &ndash;&gt;-->
+            <!--<property name="incrementField" value="id"/>-->
+            <!--&lt;!&ndash; 自定义属性配置：乐观锁版本数据库字段名称，需要为数值类型 &ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="versionField" value="version"/>&ndash;&gt;-->
+            <!--&lt;!&ndash; 自定义属性配置：对应的数据源名称 &ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="dataSourceName" value="db6"/>&ndash;&gt;-->
+            <!--<property name="enableCountByExample" value="true"/>-->
+            <!--<property name="enableUpdateByExample" value="true"/>-->
+            <!--<property name="enableDeleteByExample" value="true"/>-->
+            <!--<property name="enableSelectByExample" value="true"/>-->
+            <!--<property name="selectByExampleQueryId" value="true"/>-->
+        <!--</table>-->
+        <!--&lt;!&ndash; 要对那些数据表进行生成操作，至少要有一个 &ndash;&gt;-->
+        <!--<table tableName="address" domainObjectName="Address">-->
+            <!--&lt;!&ndash; 自定义属性配置：设置此属性表示该字段自增,默认值为id &ndash;&gt;-->
+            <!--<property name="incrementField" value="id"/>-->
+            <!--&lt;!&ndash; 自定义属性配置：乐观锁版本数据库字段名称，需要为数值类型 &ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="versionField" value="version"/>&ndash;&gt;-->
+            <!--&lt;!&ndash; 自定义属性配置：对应的数据源名称 &ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="dataSourceName" value="db6"/>&ndash;&gt;-->
+            <!--<property name="enableCountByExample" value="true"/>-->
+            <!--<property name="enableUpdateByExample" value="true"/>-->
+            <!--<property name="enableDeleteByExample" value="true"/>-->
+            <!--<property name="enableSelectByExample" value="true"/>-->
+            <!--<property name="selectByExampleQueryId" value="true"/>-->
+        <!--</table>-->
+        <!--&lt;!&ndash; 要对那些数据表进行生成操作，至少要有一个 &ndash;&gt;-->
+        <!--<table tableName="buyer" domainObjectName="Buyer">-->
+            <!--&lt;!&ndash; 自定义属性配置：设置此属性表示该字段自增,默认值为id &ndash;&gt;-->
+            <!--<property name="incrementField" value="id"/>-->
+            <!--&lt;!&ndash; 自定义属性配置：乐观锁版本数据库字段名称，需要为数值类型 &ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="versionField" value="version"/>&ndash;&gt;-->
+            <!--&lt;!&ndash; 自定义属性配置：对应的数据源名称 &ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="dataSourceName" value="db6"/>&ndash;&gt;-->
+            <!--<property name="enableCountByExample" value="true"/>-->
+            <!--<property name="enableUpdateByExample" value="true"/>-->
+            <!--<property name="enableDeleteByExample" value="true"/>-->
+            <!--<property name="enableSelectByExample" value="true"/>-->
+            <!--<property name="selectByExampleQueryId" value="true"/>-->
+        <!--</table>-->
+        <!--&lt;!&ndash; 要对那些数据表进行生成操作，至少要有一个 &ndash;&gt;-->
+        <!--<table tableName="goods_item" domainObjectName="GoodsItem">-->
+            <!--&lt;!&ndash; 自定义属性配置：设置此属性表示该字段自增,默认值为id &ndash;&gt;-->
+            <!--<property name="incrementField" value="id"/>-->
+            <!--&lt;!&ndash; 自定义属性配置：乐观锁版本数据库字段名称，需要为数值类型 &ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="versionField" value="version"/>&ndash;&gt;-->
+            <!--&lt;!&ndash; 自定义属性配置：对应的数据源名称 &ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="dataSourceName" value="db6"/>&ndash;&gt;-->
+            <!--<property name="enableCountByExample" value="true"/>-->
+            <!--<property name="enableUpdateByExample" value="true"/>-->
+            <!--<property name="enableDeleteByExample" value="true"/>-->
+            <!--<property name="enableSelectByExample" value="true"/>-->
+            <!--<property name="selectByExampleQueryId" value="true"/>-->
+        <!--</table>-->
+        <!--&lt;!&ndash; 要对那些数据表进行生成操作，至少要有一个 &ndash;&gt;-->
+        <!--<table tableName="logistics" domainObjectName="Logistics">-->
+            <!--&lt;!&ndash; 自定义属性配置：设置此属性表示该字段自增,默认值为id &ndash;&gt;-->
+            <!--<property name="incrementField" value="id"/>-->
+            <!--&lt;!&ndash; 自定义属性配置：乐观锁版本数据库字段名称，需要为数值类型 &ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="versionField" value="version"/>&ndash;&gt;-->
+            <!--&lt;!&ndash; 自定义属性配置：对应的数据源名称 &ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="dataSourceName" value="db6"/>&ndash;&gt;-->
+            <!--<property name="enableCountByExample" value="true"/>-->
+            <!--<property name="enableUpdateByExample" value="true"/>-->
+            <!--<property name="enableDeleteByExample" value="true"/>-->
+            <!--<property name="enableSelectByExample" value="true"/>-->
+            <!--<property name="selectByExampleQueryId" value="true"/>-->
+        <!--</table>-->
+        <!--&lt;!&ndash; 要对那些数据表进行生成操作，至少要有一个 &ndash;&gt;-->
+        <!--<table tableName="order_goods_item" domainObjectName="OrderGoodsItem">-->
+            <!--&lt;!&ndash; 自定义属性配置：设置此属性表示该字段自增,默认值为id &ndash;&gt;-->
+            <!--<property name="incrementField" value="id"/>-->
+            <!--&lt;!&ndash; 自定义属性配置：乐观锁版本数据库字段名称，需要为数值类型 &ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="versionField" value="version"/>&ndash;&gt;-->
+            <!--&lt;!&ndash; 自定义属性配置：对应的数据源名称 &ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="dataSourceName" value="db6"/>&ndash;&gt;-->
+            <!--<property name="enableCountByExample" value="true"/>-->
+            <!--<property name="enableUpdateByExample" value="true"/>-->
+            <!--<property name="enableDeleteByExample" value="true"/>-->
+            <!--<property name="enableSelectByExample" value="true"/>-->
+            <!--<property name="selectByExampleQueryId" value="true"/>-->
+        <!--</table>-->
+        <!--&lt;!&ndash; 要对那些数据表进行生成操作，至少要有一个 &ndash;&gt;-->
         <table tableName="order_item" domainObjectName="OrderItem">
             <!-- 自定义属性配置：设置此属性表示该字段自增,默认值为id -->
             <property name="incrementField" value="id"/>
@@ -155,32 +155,32 @@
             <property name="enableSelectByExample" value="true"/>
             <property name="selectByExampleQueryId" value="true"/>
         </table>
-        <table tableName="store_owner" domainObjectName="StoreOwner">
-            <!-- 自定义属性配置：设置此属性表示该字段自增,默认值为id -->
-            <property name="incrementField" value="id"/>
-            <!-- 自定义属性配置：乐观锁版本数据库字段名称，需要为数值类型 -->
-            <!--<property name="versionField" value="version"/>-->
-            <!-- 自定义属性配置：对应的数据源名称 -->
-            <!--<property name="dataSourceName" value="db6"/>-->
-            <property name="enableCountByExample" value="true"/>
-            <property name="enableUpdateByExample" value="true"/>
-            <property name="enableDeleteByExample" value="true"/>
-            <property name="enableSelectByExample" value="true"/>
-            <property name="selectByExampleQueryId" value="true"/>
-        </table>
-        <table tableName="type" domainObjectName="Type">
-            <!-- 自定义属性配置：设置此属性表示该字段自增,默认值为id -->
-            <property name="incrementField" value="id"/>
-            <!-- 自定义属性配置：乐观锁版本数据库字段名称，需要为数值类型 -->
-            <!--<property name="versionField" value="version"/>-->
-            <!-- 自定义属性配置：对应的数据源名称 -->
-            <!--<property name="dataSourceName" value="db6"/>-->
-            <property name="enableCountByExample" value="true"/>
-            <property name="enableUpdateByExample" value="true"/>
-            <property name="enableDeleteByExample" value="true"/>
-            <property name="enableSelectByExample" value="true"/>
-            <property name="selectByExampleQueryId" value="true"/>
-        </table>
+        <!--<table tableName="store_owner" domainObjectName="StoreOwner">-->
+            <!--&lt;!&ndash; 自定义属性配置：设置此属性表示该字段自增,默认值为id &ndash;&gt;-->
+            <!--<property name="incrementField" value="id"/>-->
+            <!--&lt;!&ndash; 自定义属性配置：乐观锁版本数据库字段名称，需要为数值类型 &ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="versionField" value="version"/>&ndash;&gt;-->
+            <!--&lt;!&ndash; 自定义属性配置：对应的数据源名称 &ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="dataSourceName" value="db6"/>&ndash;&gt;-->
+            <!--<property name="enableCountByExample" value="true"/>-->
+            <!--<property name="enableUpdateByExample" value="true"/>-->
+            <!--<property name="enableDeleteByExample" value="true"/>-->
+            <!--<property name="enableSelectByExample" value="true"/>-->
+            <!--<property name="selectByExampleQueryId" value="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="type" domainObjectName="Type">-->
+            <!--&lt;!&ndash; 自定义属性配置：设置此属性表示该字段自增,默认值为id &ndash;&gt;-->
+            <!--<property name="incrementField" value="id"/>-->
+            <!--&lt;!&ndash; 自定义属性配置：乐观锁版本数据库字段名称，需要为数值类型 &ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="versionField" value="version"/>&ndash;&gt;-->
+            <!--&lt;!&ndash; 自定义属性配置：对应的数据源名称 &ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="dataSourceName" value="db6"/>&ndash;&gt;-->
+            <!--<property name="enableCountByExample" value="true"/>-->
+            <!--<property name="enableUpdateByExample" value="true"/>-->
+            <!--<property name="enableDeleteByExample" value="true"/>-->
+            <!--<property name="enableSelectByExample" value="true"/>-->
+            <!--<property name="selectByExampleQueryId" value="true"/>-->
+        <!--</table>-->
         <!--<table tableName="test_name" domainObjectName="oob.Name" incrementField="id"></table>-->
 
     </context>

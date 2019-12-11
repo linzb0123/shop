@@ -27,4 +27,7 @@ public interface OrderItemMapper {
     int updateByPrimaryKeySelective(OrderItem record);
 
     int updateByPrimaryKey(OrderItem record);
+
+    List<OrderItem> selectOrderList(@Param("search") String search, @Param("orderCol") String orderCol, @Param("orderDir") String orderDir);
+
 }

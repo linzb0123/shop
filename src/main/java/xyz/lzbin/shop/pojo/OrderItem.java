@@ -22,6 +22,8 @@ public class OrderItem {
 
     private Integer logisticsId;
 
+    private Integer storeId;
+
     public Integer getId() {
         return id;
     }
@@ -92,5 +94,13 @@ public class OrderItem {
 
     public void setLogisticsId(Integer logisticsId) {
         this.logisticsId = logisticsId;
+    }
+
+    public Integer getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
     }
 }

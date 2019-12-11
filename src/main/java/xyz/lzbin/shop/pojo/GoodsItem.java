@@ -24,6 +24,8 @@ public class GoodsItem {
 
     private Integer sort;
 
+    private String category;
+
     public Integer getId() {
         return id;
     }
@@ -102,5 +104,13 @@ public class GoodsItem {
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

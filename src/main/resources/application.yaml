@@ -3,11 +3,11 @@ server:
 spring:
   thymeleaf:
     cache: false
-#    mode: HTML
+    #    mode: HTML
     encoding: UTF-8
   mvc:
     favicon:
-      enable : true
+      enable: true
     static-path-pattern: /static/**
   #Druid配置 数据库连接
   datasource:
@@ -21,6 +21,11 @@ spring:
       min-idle: 5
       max-active: 20
       max-wait: 60000
+  servlet:
+    multipart:
+      location: temp
+      max-file-size: 10MB
+      max-request-size: 10MB
 
 mybatis:
   mapper-locations:  classpath:mapper/*.xml

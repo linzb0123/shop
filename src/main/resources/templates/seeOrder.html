@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--_meta 作为公共模版分离出去-->
+<th:block th:replace="_meta :: meta"></th:block>
+<!--/meta 作为公共模版分离出去-->
+<title>订单</title>
+</head>
+<body>
+<div class="pd-20">
+    <table class="table">
+        <tbody>
+        <tr>
+            <th class="text-r" width="80">订单编号：</th>
+            <td id="id">1233</td>
+        </tr>
+        <tr>
+            <th class="text-r">买家：</th>
+            <td id="buyerName">小明</td>
+        </tr>
+        <tr>
+            <th class="text-r">状态：</th>
+            <td id="status">未支付</td>
+        </tr>
+        <tr>
+            <th class="text-r">支付时间：</th>
+            <td>2019-12-12</td>
+        </tr>
+        <tr>
+            <th class="text-r">发货：</th>
+            <td>未发货</td>
+        </tr>
+        <tr>
+            <th class="text-r">物流单号：</th>
+            <td>1233333</td>
+        </tr>
+        <tr>
+            <th class="text-r">地址：</th>
+            <td>广东省广州市番禺区暨南大学</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!--<div class="cl pd-20" style=" background-color:#5bacb6">-->
+    <!--&lt;!&ndash;<img class="avatar size-XL l" src="static/h-ui/images/user.png">&ndash;&gt;-->
+    <!--<dl style="margin-left:80px; color:#fff">-->
+        <!--<dt><span class="f-18">张三</span> <span class="pl-10 f-12">余额：40</span></dt>-->
+        <!--<dd class="pt-10 f-12" style="margin-left:0">这家伙很懒，什么也没有留下</dd>-->
+    <!--</dl>-->
+<!--</div>-->
+
+<!--_footer 作为公共模版分离出去-->
+<th:block th:replace="_footer :: footer"></th:block>
+<!--/_footer /作为公共模版分离出去-->
+</body>
+</html>

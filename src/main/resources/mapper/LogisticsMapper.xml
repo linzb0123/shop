@@ -108,7 +108,10 @@
       #{tel,jdbcType=VARCHAR}, #{logisticsCom,jdbcType=VARCHAR}, #{logisticsAddr,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="xyz.lzbin.shop.pojo.Logistics" >
+  <insert id="insertSelective" parameterType="xyz.lzbin.shop.pojo.Logistics"  >
+    <selectKey resultType="int" keyProperty="id" order="AFTER">
+      SELECT LOGISTICS_SEQ.CURRVAL FROM DUAL
+    </selectKey>
     insert into LOGISTICS
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

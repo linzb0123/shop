@@ -27,4 +27,6 @@ public interface BuyerMapper {
     int updateByPrimaryKeySelective(Buyer record);
 
     int updateByPrimaryKey(Buyer record);
+
+    List<Buyer> selectBuyerList(@Param("search") String search, @Param("orderCol") String orderCol, @Param("orderDir") String orderDir);
 }

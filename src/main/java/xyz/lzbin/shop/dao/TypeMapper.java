@@ -27,4 +27,6 @@ public interface TypeMapper {
     int updateByPrimaryKeySelective(Type record);
 
     int updateByPrimaryKey(Type record);
+
+    List<Type> selectTypeList(@Param("search") String search, @Param("orderCol") String orderCol, @Param("orderDir") String orderDir);
 }

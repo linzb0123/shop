@@ -27,4 +27,6 @@ public interface GoodsItemMapper {
     int updateByPrimaryKeySelective(GoodsItem record);
 
     int updateByPrimaryKey(GoodsItem record);
+
+    List<GoodsItem> selectGoodsList(@Param("search") String search, @Param("orderCol") String orderCol, @Param("orderDir") String orderDir);
 }

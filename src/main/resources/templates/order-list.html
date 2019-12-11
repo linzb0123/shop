@@ -1,0 +1,277 @@
+﻿<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--_meta 作为公共模版分离出去-->
+<th:block th:replace="_meta :: meta"></th:block>
+<!--/meta 作为公共模版分离出去-->
+
+<title>lwc商店后台</title>
+<style>
+    .table > tbody > tr > td {
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+<!--_header 作为公共模版分离出去-->
+<div th:replace="_header :: #navbar-wrapper"></div>
+<!--/_header 作为公共模版分离出去-->
+
+<!--_menu 作为公共模版分离出去-->
+<div th:replace="_menu :: #Hui-aside"></div>
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a>
+</div>
+<!--/_menu 作为公共模版分离出去-->
+
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
+        <span class="c-gray en">&gt;</span>
+        商品管理
+        <span class="c-gray en">&gt;</span>
+        商品列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
+                href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
+    </nav>
+    <div class="Hui-article">
+        <article class="cl pd-20">
+            <form id="form-search" class="text-c">
+                <input type="text" class="input-text" style="width:250px" placeholder="输入订单编号" id="searchKey"
+                       name="searchKey">
+                <button type="submit" id="searchBtn" class="btn btn-success"><i class="Hui-iconfont">&#xe665;</i> 搜订单
+                </button>
+            </form>
+            <div class="cl pd-5 bg-1 bk-gray mt-20">
+                <span class="l"><a href="javascript:;" onclick="goods_add('添加订单','goods-add.html','800','500')"
+                                   class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a> </span>
+                <span class="r">共有数据：<strong id="goodsCount">0</strong> 条</span>
+            </div>
+            <table class="table table-border table-bordered table-bg">
+                <thead>
+                <tr>
+                    <th scope="col" colspan="12">商品列表</th>
+                </tr>
+
+                <tr class="text-c">
+                    <th width="25"><input type="checkbox" name="" value=""></th>
+                    <th width="40">编号</th>
+                    <th width="50">买家</th>
+                    <th width="50">总价</th>
+                    <th width="50">创建时间</th>
+                    <th width="40">状态</th>
+                    <th width="40">支付时间</th>
+                    <th width="40">地址</th>
+                    <th width="40">物流</th>
+                    <th width="50">操作</th>
+                </tr>
+                </thead>
+            </table>
+        </article>
+    </div>
+</section>
+
+<!--_footer 作为公共模版分离出去-->
+<th:block th:replace="_footer :: footer"></th:block>
+<!--/_footer /作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="/static/lib/common.js"></script>
+<script type="text/javascript" th:inline="none">
+    $(function () {
+        $('.table').dataTable({
+            serverSide: true,//开启服务器模式
+            "processing": true,//加载显示提示
+            searching: false,
+            bLengthChange: false,
+            "ajax": {
+                url: "/order/getList",
+                type: 'GET'
+            },
+            data: {
+                "searchKey": "",
+            },
+            "columns": [
+                {
+                    "data": null,
+                    render: function (data, type, row, meta) {
+                        return "<input name=\"checkbox\" value=\"" + row.id + "\" type=\"checkbox\">";
+                    }
+                },
+                {"data": "id"},
+                {"data": "name"},
+                {"data": "totalPrice"},
+                {
+                    "data": "createTime",
+                    render: function (data, type, row, meta) {
+                        return date(data);
+                    }
+                },
+                {
+                    "data": "status",
+                    render: function (data, type, row, meta) {
+                        var payStatus = "";
+                        var fahuo = "";
+                        if (data == 0) {
+                            payStatus = "<span class=\"label label-default  radius td-status\">未付款</span>";
+                        }
+                        else if (data == 1) {
+                            payStatus = "<span class=\"label label-secondary radius td-status\">已付款</span>";
+                        } else if (data == 2) {
+                            payStatus = "<span class=\"label label-success radius td-status\">已完成 </span>";
+                        } else if (data == 3) {
+                            payStatus = "<span class=\"label label-warning radius td-status\">退款 </span>";
+                        } else {
+                            payStatus = "<span class=\"label label-danger radius td-status\">异常 </span>";
+                        }
+                        if (row.logisticsId != null) {
+                            fahuo = "<span class=\"label label-success radius td-status\">已发货 </span>";
+                        } else {
+                            fahuo = "<span class=\"label label-warning radius td-status\">未发货 </span>";
+                        }
+                        return payStatus + " " + fahuo;
+                    }
+                },
+                {
+                    "data": "payTime",
+                    render: function (data, type, row, meta) {
+                        return date(data);
+                    }
+                },
+                {"data": "logisticsId"},
+                {"data": "addressId"},
+                {
+                    "data": null,
+                    render: function (data, type, row, meta) {
+                        var rowStr = JSON.stringify(row);
+                        var fahuo = "";
+                        if (row.logisticsId == null) {
+                            fahuo = "<a title=\"发货\" href=\"javascript:;\" onclick=\'fahuo(\"发货\",\"fahuo\"," + row.id + ","+row.addressId+",400,600)\' class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\" style='font-size:16px;'>&#xe603;</i></a>";
+                        }
+                        var see = "<a title=\"查看订单\" href=\"javascript:;\" onclick=\'seeOrder(\"查看\",\"seeOrder\"," + rowStr + ")\' class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\" style='font-size:16px;'>&#xe725;</i></a>";
+                        var del = "<a title=\"删除\" href=\"javascript:;\" onclick=\"del(this," + row.id + ")\" class=\"ml-5\" style=\"text-decoration:none\"><i class=\"Hui-iconfont\" style='font-size:16px;'>&#xe6e2;</i></a>";
+                        return see + fahuo + del;
+                    }
+                }
+            ],
+            "aaSorting": [[1, "asc"]],//默认第几个排序
+            "bStateSave": true,//状态保存
+            "aoColumnDefs": [
+                {"bVisible": false, "aTargets": [7,8]}, //控制列的隐藏显示
+                {"orderable": false, "aTargets": [0, 3]}// 制定列不参与排序
+            ],
+            colReorder: true
+        });
+        count();
+    });
+
+    function count() {
+        $.ajax({
+            type: 'GET',
+            url: '/goods/count',
+            dataType: 'json',
+            success: function (res) {
+                if (res.code == 200) {
+                    $("#goodsCount").html(res.data.count);
+                    return;
+                }
+                layer.alert(data.message, {title: '错误信息', icon: 2});
+            },
+            error: function (XMLHttpRequest) {
+                layer.alert('数据处理失败! 错误码:' + XMLHttpRequest.status, {title: '错误信息', icon: 2});
+            }
+        })
+    }
+
+    function addOneTotal() {
+        var cur = $("#goodsCount").html();
+        $("#goodsCount").html(parseInt(cur) + 1);
+    }
+
+    /*
+        参数解释：
+        title	标题
+        url		请求的url
+        id		需要操作的数据id
+        w		弹出层宽度（缺省调默认值）
+        h		弹出层高度（缺省调默认值）
+    */
+
+    /*删除*/
+    function del(obj, id) {
+        layer.confirm('确认要删除吗？', function (index) {
+            //此处请求后台程序，下方是成功后的前台处理……
+            var inx = layer.load(3);
+            $.ajax({
+                type: 'POST',
+                url: '/goods/remove/' + id,
+                dataType: 'json',
+                success: function (res) {
+                    layer.close(inx);
+                    if (res.code == 200) {
+                        layer.msg('已删除!', {icon: 1, time: 1000});
+                        refresh();
+                        return;
+                    }
+                    layer.alert(res.msg, {title: '错误信息', icon: 2});
+                    return;
+                },
+                error: function (XMLHttpRequest) {
+                    layer.close(inx);
+                    layer.alert('数据处理失败! 错误码:' + XMLHttpRequest.status, {title: '错误信息', icon: 2});
+                }
+            });
+            // $(obj).parents("tr").remove();
+            // layer.msg('已删除!', {icon: 1, time: 1000});
+        });
+    }
+
+    var orderId;
+    var addrId;
+
+    function fahuo(title, url, id, aId, w, h) {
+        orderId = id;
+        addrId = aId;
+        layer_show(title, url, w, h);
+    }
+
+    var orderData;
+
+    function seeOrder(title, url, data) {
+        orderData = data;
+        layer_show(title, url, 800, 500);
+    }
+
+    /*多条件查询*/
+    $("#form-search").validate({
+        rules: {
+            searchKey: {
+                required: false,
+            },
+        },
+        onkeyup: false,
+        focusCleanup: false,
+        success: "valid",
+        submitHandler: function (form) {
+            var searchKey = $('#searchKey').val();
+            console.log(searchKey);
+            var param = {
+                "searchKey": searchKey,
+            };
+            var table = $('.table').DataTable();
+            table.settings()[0].ajax.data = param;
+            table.ajax.reload();
+        }
+    });
+
+    /**
+     * 提示成功信息
+     * @param content
+     */
+    function msgSuccess(content) {
+        layer.msg(content, {icon: 1, time: 3000});
+    }
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>
